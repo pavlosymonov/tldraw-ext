@@ -1,5 +1,4 @@
 // Global resources
-const extTitle = 'TLDraw'
 const extensions: (Extension | null)[] = []
 
 class Extension {
@@ -37,7 +36,7 @@ ext.runtime.onExtensionClick.addListener(async () => {
     const extIndex = getExtIndex()
 
     const extNumber = extIndex + 1
-    const extTitleWithId = extTitle + ' #' + extNumber
+    const extTitleWithId = `TLDraw - #${extNumber}`
     
     const isDarkMode = await ext.windows.getPlatformDarkMode()
     const icon = getDarkModeIcon(isDarkMode)
@@ -52,7 +51,7 @@ ext.runtime.onExtensionClick.addListener(async () => {
 
     // Create window
     const window = await ext.windows.create({
-      title: extTitle,
+      title: extTitleWithId,
       icon,
       fullscreenable: true,
       vibrancy: false,
@@ -77,8 +76,7 @@ ext.runtime.onExtensionClick.addListener(async () => {
       autoResize: { width: true, height: true }
     })
 
-    await ext.webviews.loadFile(webview.id, 'src/index.html')
-    await ext.webviews.openDevTools(webview.id)
+    await ext.webviews.loadFile(webview.id, 'index.html')
 
     const extention = new Extension(
       tab,
