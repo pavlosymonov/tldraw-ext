@@ -6,6 +6,9 @@ import { viteSingleFile } from "vite-plugin-singlefile"
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), viteSingleFile()],
+  server: {
+    open: true
+  },
   build: {
 		outDir: path.join(__dirname, '../ext')
 	},

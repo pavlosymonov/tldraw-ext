@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "npm run build --prefix ./source && webpack --mode=production --node-env=production",
-    "dev": "webpack --mode=development --node-env=development",
+    "dev": "npm run dev --prefix ./source",
     "lint": "eslint ."
   },
   "devDependencies": {
