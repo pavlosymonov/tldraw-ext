@@ -2,7 +2,7 @@
 
 Steps to build this extension:
 
-- Clone: `git clone https://github.com/pavlosymonov/tldraw-ext <dir-name>`
+- Clone repo with SSH `git clone git@github.com:pavlosymonov/tldraw-ext.git`
 
 - Run `npm install && npm install --prefix ./source` to download all dependencies for application and extantion
 
