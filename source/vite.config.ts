@@ -6,8 +6,7 @@ import { viteSingleFile } from "vite-plugin-singlefile"
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), viteSingleFile()],
-  
   build: {
-		outDir: path.join(__dirname, '../ext/src'),
+		outDir: path.join(__dirname, '../ext')
 	},
 })
