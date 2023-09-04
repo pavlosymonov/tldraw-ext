@@ -13,7 +13,7 @@ module.exports = {
       patterns: [
         { from: 'ext/icons', to: 'icons' },
         { from: 'ext/manifest.json', to: 'manifest.json' },
-        { from: 'ext/src', to: 'src' },
+        { from: 'ext/index.html', to: 'index.html' },
       ],
     }),
   ],
