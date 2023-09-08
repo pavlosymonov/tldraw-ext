@@ -1,11 +1,24 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
-    "module": "commonjs",
-    "lib": ["ES6"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    "strict": true,
+
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
     "types": [
       "@extpkg/types-console",
       "@extpkg/types-runtime",
@@ -15,5 +28,6 @@
       "@extpkg/types-websessions"
     ]
   },
-  "include": ["./ext/main.ts"]
+  "include": ["./ext/main.ts", "./source/src/main.tsx"],
+  "exclude": ["node_modules", "dist"],
 }

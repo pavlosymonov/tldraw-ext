@@ -1,28 +1,30 @@
-import { useEffect } from 'react';
-import { Tldraw } from '@tldraw/tldraw';
+import { useEffect } from 'react'
+import { Tldraw } from '@tldraw/tldraw'
 import { useEditor } from '@tldraw/editor'
-import '@tldraw/tldraw/tldraw.css';
-import './App.css';
+import { getAssetUrlsByMetaUrl } from '@tldraw/assets/urls'
+import '@tldraw/tldraw/tldraw.css'
+import './App.css'
+
+const assetUrls = getAssetUrlsByMetaUrl((asset: string) => asset)
 
 const InsideOfEditorContext = () => {
 	const editor = useEditor()
 
-	useEffect(() => {
-		const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-		editor.user.updateUserPreferences({ isDarkMode })
+	useEffect(() => {	
+		const handleStorage = () => {
+			const isDarkMode = localStorage.getItem('darkMode')
 
-		const onDarkModeChange = (event: MediaQueryListEvent) => {
-			const isDarkMode: boolean = event.matches;
-			console.log(isDarkMode)
-	
-			editor.user.updateUserPreferences({ isDarkMode: isDarkMode })
+			editor.user.updateUserPreferences({
+				isDarkMode: isDarkMode === 'false' ? false : true
+			})
 		}
-
-		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', onDarkModeChange);
+		handleStorage()
+		
+		window.addEventListener('storage', handleStorage)
 		return () => {
-			window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', onDarkModeChange);
+			window.removeEventListener('storage', handleStorage)
 		}
-	}, [])
+}, [])
 
 	return null
 }
@@ -30,11 +32,11 @@ const InsideOfEditorContext = () => {
 function App() {
 	return (
 		<div className="tldraw__editor">
-			<Tldraw persistenceKey='tldraw-board' autoFocus>
+			<Tldraw persistenceKey='tldraw-board' autoFocus assetUrls={assetUrls}>
 				<InsideOfEditorContext/>
 			</Tldraw>
 		</div>
 	)
 }
 
-export default App;
+export default App

@@ -1,41 +1,30 @@
 module.exports = {
-  'env': {
-    'commonjs': true,
-    'es2021': true
-  },
-  'extends': [
+  env: { browser: true, commonjs: true, es2021: true },
+  extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended'
   ],
-  'overrides': [
-  ],
-  'parser': '@typescript-eslint/parser',
-  'parserOptions': {
-    'ecmaVersion': 'latest'
+  overrides: [],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 'latest'
   },
-  'plugins': [
+  plugins: [
+    'react-refresh',
     '@typescript-eslint'
   ],
-  'rules': {
-    'indent': [
-      'error',
-      2
-    ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'never'
-    ],
-    '@typescript-eslint/no-explicit-any': 'off'
+  rules: {
+    'linebreak-style': ['error', 'unix'],
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'never'],
+    '@typescript-eslint/no-explicit-any': 'off',
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ]
   },
-  'ignorePatterns': [
+  ignorePatterns: [
     'webpack.config.js',
     'dist/*'
   ]

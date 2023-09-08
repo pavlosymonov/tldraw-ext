@@ -30,6 +30,10 @@ function getDarkModeIcon(isDarkMode: boolean) {
   return isDarkMode ? 'icons/icon-128-dark.png' : 'icons/icon-128.png'
 }
 
+async function setDarkModeJS(webviewId: string, darkMode: boolean) {
+  await ext.webviews.executeJavaScript(webviewId, `localStorage.setItem('darkMode', '${darkMode}');window.dispatchEvent(new Event('storage'))`)
+}
+
 // Extension clicked
 ext.runtime.onExtensionClick.addListener(async () => {
   try {
@@ -77,6 +81,7 @@ ext.runtime.onExtensionClick.addListener(async () => {
     })
 
     await ext.webviews.loadFile(webview.id, 'index.html')
+    setDarkModeJS(webview.id, isDarkMode)
 
     const extention = new Extension(
       tab,
@@ -204,6 +209,7 @@ ext.windows.onUpdatedDarkMode.addListener(async (_, details: ext.windows.EventDa
       if (!value) return
 
       await ext.windows.setIcon(value.window.id, icon)
+      setDarkModeJS(value.webview.id, details.enabled)
     })
 
   } catch (error) {
